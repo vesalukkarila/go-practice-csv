@@ -1,6 +1,6 @@
 # go-practice-csv
 
-Repository for practicing csv parsing and other stuff.
+Pair programming exercise: Repository for practicing csv parsing and other stuff.
 
 ## Usage
 
