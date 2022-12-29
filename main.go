@@ -17,19 +17,36 @@ type TLD struct {
 
 func main() {
 
-	f, err := os.Open("data/country.csv")
+	//var allTlds []TLD
+
+	tlds, err := getTldsForType("country")
+	if err != nil {
+		log.Panic(err)
+	}
+	fmt.Println(tlds)
+
+	// TODO...
+	//allTlds = append(allTlds, tlds...)
+}
+
+func getTldsForType(tldType string) ([]TLD, error) {
+	var tlds []TLD
+	var err error
+
+	filePath := fmt.Sprintf("data/%s.csv", tldType)
+
+	f, err := os.Open(filePath)
 	defer f.Close()
 
 	if err != nil {
-		log.Panic(err)
+		return tlds, err
 	}
 
-	tlds, err := parseTlds(f)
+	tlds, err = parseTlds(f)
 	if err != nil {
-		log.Panic(err)
+		return tlds, err
 	}
-
-	fmt.Println(tlds)
+	return tlds, nil
 }
 
 func parseTlds(source io.Reader) ([]TLD, error) { //io.Reader = interface
